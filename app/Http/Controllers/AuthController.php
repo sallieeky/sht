@@ -41,7 +41,9 @@ class AuthController extends Controller
 
     public function sendMail()
     {
-        return view('sendmail');
+        $link = "https://instagram/com";
+        return substr($link, 0, 4);
+        // return view('sendmail');
     }
     public function sendMailPost(Request $request)
     {

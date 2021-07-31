@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ShortController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 // ==============================================================================================
 
@@ -45,6 +47,10 @@ Route::post('/register', [AuthController::class, 'registerPost']);
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginPost']);
 
+Route::get('/short', [ShortController::class, 'short'])->middleware(['auth', 'verified']);
+Route::post('/short', [ShortController::class, 'shortPost']);
+
+
 Route::get('/sendmail', [AuthController::class, 'sendMail']);
 Route::post('/sendmail', [AuthController::class, 'sendMailPost']);
 
@@ -52,3 +58,6 @@ Route::post('/sendmail', [AuthController::class, 'sendMailPost']);
 Route::get('/', function () {
     return view('welcome');
 })->middleware(['auth', 'verified']);
+
+
+Route::get('/{link:url_custom}', [ShortController::class, 'direct']);
