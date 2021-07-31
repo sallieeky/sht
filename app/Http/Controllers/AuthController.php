@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -35,5 +36,23 @@ class AuthController extends Controller
         } else {
             return redirect()->back();
         }
+    }
+
+
+    public function sendMail()
+    {
+        return view('sendmail');
+    }
+    public function sendMailPost(Request $request)
+    {
+        $data = [
+            'nama' => $request->to,
+            'pesan' => $request->pesan
+        ];
+        Mail::send('pesan.pesan', $data, function ($message) use ($request) {
+            $message->to($request->to);
+            $message->subject("Pesan Dari SHT");
+        });
+        return redirect()->back();
     }
 }
