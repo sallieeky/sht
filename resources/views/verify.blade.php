@@ -8,6 +8,7 @@
 </head>
 <body>
   <h1>Silakan Verifikasi Akun Dulu</h1>
+  <h3>{{ Auth::user() }}</h3>
   <form action="/email/verification-notification" method="POST">
     @csrf
     <button name="user" value="{{ Auth::user() }}"> Resend Verifikasi</button>

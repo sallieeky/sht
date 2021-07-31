@@ -22,6 +22,9 @@ class AuthController extends Controller
             'password' => bcrypt($request->password)
         ]);
         event(new Registered($user));
+
+        Auth::login($user);
+        return redirect('/short');
     }
 
 
@@ -42,8 +45,8 @@ class AuthController extends Controller
     public function sendMail()
     {
         $link = "https://instagram/com";
-        return substr($link, 0, 4);
-        // return view('sendmail');
+        // return substr($link, 0, 4);
+        return view('sendmail');
     }
     public function sendMailPost(Request $request)
     {

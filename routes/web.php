@@ -24,12 +24,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/email/verify', function () {
     return view('verify');
-})->middleware('auth')->name('verification.notice');
+})->middleware(['auth', 'redirect.verified'])->name('verification.notice');
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
 
-    return redirect('/');
+    return redirect('/short');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 
