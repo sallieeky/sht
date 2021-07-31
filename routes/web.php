@@ -45,9 +45,6 @@ Route::post('/register', [AuthController::class, 'registerPost']);
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginPost']);
 
-Route::get('/sendmail', [AuthController::class, 'sendMail']);
-Route::post('/sendmail', [AuthController::class, 'sendMailPost']);
-
 
 Route::get('/', function () {
     return view('welcome');
